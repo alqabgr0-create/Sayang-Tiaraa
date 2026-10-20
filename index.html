@@ -1,0 +1,515 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>I'm Sorry, My Love ♡</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --bg: #100d0e;
+    --gold: #d5b477;
+    --cream: #f3e8dc;
+    --muted: #b4a09d;
+    --line: rgba(213,180,119,.3);
+    --burgundy: #632c3a;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--bg);
+    color: var(--cream);
+    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background:
+        radial-gradient(ellipse at 10% 10%, #67273338, transparent 45%),
+        radial-gradient(ellipse at 90% 85%, #8a64251a, transparent 40%);
+}
+
+.noise {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: .025;
+    z-index: 5;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.wrapper {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 35px 16px;
+    position: relative;
+}
+
+.card {
+    width: 100%;
+    max-width: 570px;
+    text-align: center;
+    border: 1px solid var(--line);
+    background: linear-gradient(145deg, #21191b, #141011 75%);
+    padding: 52px 35px 30px;
+    position: relative;
+    box-shadow: 0 30px 100px #0008;
+    animation: fadeUp 1.2s ease both;
+}
+
+.card::before,
+.card::after {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-color: var(--gold);
+    opacity: .7;
+    pointer-events: none;
+}
+
+.card::before {
+    top: 12px;
+    left: 12px;
+    border-top: 1px solid;
+    border-left: 1px solid;
+}
+
+.card::after {
+    bottom: 12px;
+    right: 12px;
+    border-bottom: 1px solid;
+    border-right: 1px solid;
+}
+
+.eyebrow {
+    color: var(--gold);
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+.symbol {
+    font-size: 32px;
+    color: var(--gold);
+    margin: 25px 0 20px;
+    animation: heartbeat 2s infinite;
+}
+
+h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(48px, 11vw, 76px);
+    line-height: .95;
+    margin-bottom: 20px;
+}
+
+h1 span {
+    color: var(--gold);
+    font-style: italic;
+}
+
+.subtitle {
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 2;
+}
+
+.line {
+    width: 50px;
+    height: 1px;
+    background: var(--gold);
+    margin: 28px auto;
+}
+
+.intro {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    line-height: 1.5;
+    max-width: 400px;
+    margin: auto;
+}
+
+button {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 16px 22px;
+    margin-top: 30px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+button:hover {
+    background: var(--gold);
+    color: #171112;
+}
+
+#letter {
+    display: none;
+    text-align: left;
+    border-top: 1px solid var(--line);
+    margin-top: 35px;
+    padding-top: 30px;
+    animation: fadeUp .8s ease both;
+}
+
+.letter-title {
+    text-align: center;
+    color: var(--gold);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-style: italic;
+    margin-bottom: 25px;
+}
+
+#letter p {
+    color: #c9b9b5;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 2.1;
+    margin-bottom: 18px;
+}
+
+.signature {
+    color: var(--cream) !important;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 23px !important;
+    line-height: 1.5 !important;
+    text-align: right;
+    margin-top: 28px;
+}
+
+/* FOTO PACAR */
+
+.photo-section {
+    margin-top: 40px;
+    padding-top: 32px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+}
+
+.photo-label {
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 18px;
+}
+
+.photo-frame {
+    width: min(100%, 330px);
+    margin: 0 auto;
+    padding: 7px;
+    border: 1px solid var(--gold);
+    background: linear-gradient(145deg, #35241e, #171112);
+    box-shadow: 0 0 30px #d5b47712;
+    position: relative;
+}
+
+.photo-frame img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center;
+    filter: saturate(.88);
+    transition: filter .5s, transform .5s;
+}
+
+.photo-frame:hover img {
+    filter: saturate(1);
+}
+
+.photo-caption {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 23px;
+    font-style: italic;
+    color: var(--cream);
+    margin-top: 22px;
+}
+
+.photo-note {
+    color: var(--muted);
+    font-size: 11px;
+    font-weight: 300;
+    line-height: 1.9;
+    margin-top: 9px;
+}
+
+.bottom {
+    border-top: 1px solid var(--line);
+    padding-top: 20px;
+    margin-top: 35px;
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: #82716d;
+    line-height: 2;
+}
+
+.heart {
+    position: fixed;
+    bottom: -30px;
+    color: var(--gold);
+    opacity: 0;
+    pointer-events: none;
+    animation: floatUp 9s linear forwards;
+    z-index: 0;
+}
+
+@keyframes floatUp {
+    10% { opacity: .35; }
+    90% { opacity: .2; }
+    100% {
+        transform: translateY(-110vh) rotate(30deg);
+        opacity: 0;
+    }
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.12); }
+}
+
+@media (max-width: 480px) {
+    .card {
+        padding: 45px 22px 28px;
+    }
+
+    .intro {
+        font-size: 21px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="noise"></div>
+
+<main class="wrapper">
+<section class="card">
+
+    <div class="eyebrow">A letter from my heart</div>
+
+    <div class="symbol">♡</div>
+
+    <h1>I'm Sorry,<br><span>Tiara Sayang.</span></h1>
+
+    <p class="subtitle">
+        Untuk seseorang yang begitu berarti,<br>
+        dan seseorang yang tidak ingin aku sakiti lagi.
+    </p>
+
+    <div class="line"></div>
+
+    <p class="intro">
+        "Aku tau, aku selalu buat kamu cape,
+        dan untuk itu, aku bener bener meminta maaf."
+    </p>
+
+    <button id="openBtn" onclick="toggleLetter()">
+        <span id="btnText">Read my letter ↗</span>
+    </button>
+
+    <div id="letter">
+
+        <div class="letter-title">Untuk kamu, sayang.</div>
+
+        <p>
+            Aku nggak tahu harus mulai dari mana, tapi ada satu
+            hal yang ingin aku sampaikan dengan tulus:
+            aku benar-benar minta maaf.
+        </p>
+
+        <p>
+            Maaf karena kesalahan dan sikapku telah membuatmu
+            lelah. Maaf karena mungkin selama ini kamu harus
+            menahan kecewa, memendam perasaan, dan berusaha
+            lebih keras daripada yang seharusnya.
+        </p>
+
+        <p>
+            Aku sadar, mencintai seseorang bukan hanya tentang
+            mengatakan sayang. Ada sikap yang harus dijaga,
+            perasaan yang harus dihargai, dan kepercayaan
+            yang seharusnya tidak aku rusak.
+        </p>
+
+        <p>
+            Aku nggak ingin meminta maaf hanya supaya semuanya
+            kembali seperti semula. Aku ingin benar-benar
+            memahami kesalahanku, belajar darinya, dan
+            memperbaiki diriku lewat tindakan nyata.
+        </p>
+
+        <p>
+            Kalau sekarang kamu merasa lelah, aku mengerti.
+            Kamu nggak harus memaksakan diri untuk langsung
+            memaafkanku atau berpura-pura baik-baik saja.
+            Aku ingin belajar menghargai perasaanmu,
+            termasuk ketika kamu membutuhkan waktu.
+        </p>
+
+        <p>
+            Terima kasih karena pernah berusaha sejauh ini
+            bersamaku. Aku menyesal karena ada saat-saat
+            ketika aku justru menjadi alasan kamu merasa lelah,
+            padahal seharusnya aku ikut menjaga hatimu.
+        </p>
+
+        <p>
+            Aku masih menyayangimu. Tapi aku tahu, rasa sayang
+            saja tidak cukup tanpa perubahan. Aku ingin
+            menjadi lebih baik, bukan sekadar berjanji,
+            melainkan membuktikannya sedikit demi sedikit.
+        </p>
+
+        <p>
+            Aku nggak meminta kamu melupakan kesalahanku.
+            Aku hanya ingin kamu tahu bahwa penyesalanku
+            sungguh nyata, dan aku ingin bertanggung jawab
+            atas apa yang telah aku lakukan.
+        </p>
+
+        <p>
+            Maaf ya, sayang. Untuk semua lelah yang kamu rasakan,
+            untuk kecewa yang pernah aku sebabkan,
+            dan untuk hal-hal yang seharusnya bisa aku lakukan
+            dengan lebih baik.
+        </p>
+
+        <p class="signature">
+            With all my heart,<br>
+            someone who is truly sorry. ♡
+        </p>
+
+    </div>
+
+    <!-- FOTO PACAR ADA DI BAWAH SURAT -->
+
+    <section class="photo-section">
+
+        <div class="photo-label">
+            A person I'll always cherish
+        </div>
+
+        <div class="photo-frame">
+            <img
+                src="sayang.jpg"
+                alt="Foto seseorang yang sangat berarti"
+                onerror="this.style.display='none'; document.getElementById('photoPlaceholder').style.display='flex';"
+            >
+
+            <div id="photoPlaceholder" style="
+                display:none;
+                aspect-ratio:4/5;
+                align-items:center;
+                justify-content:center;
+                flex-direction:column;
+                gap:15px;
+                color:#d5b477;
+                padding:20px;
+            ">
+                <span style="font-size:40px;">♡</span>
+                <span style="font-size:11px;line-height:1.8;">
+                    Letakkan foto pacarmu<br>
+                    dengan nama foto_pacar.jpg
+                </span>
+            </div>
+        </div>
+
+        <div class="photo-caption">
+            You mean more than words can say.
+        </div>
+
+        <p class="photo-note">
+            Di balik semua kesalahan yang pernah terjadi,<br>
+            ada seseorang yang tetap ingin aku hargai dengan tulus.
+        </p>
+
+    </section>
+
+    <div class="bottom">
+        TIARA IMUTT · JUST FOR YOU ♡
+    </div>
+
+</section>
+</main>
+
+<script>
+function toggleLetter() {
+    const letter = document.getElementById("letter");
+    const btnText = document.getElementById("btnText");
+
+    if (letter.style.display === "block") {
+        letter.style.display = "none";
+        btnText.textContent = "Read my letter ↗";
+    } else {
+        letter.style.display = "block";
+        btnText.textContent = "Close my letter ↑";
+
+        setTimeout(() => {
+            letter.scrollIntoView({
+                behavior: "smooth",
+                block: "nearest"
+            });
+        }, 100);
+    }
+}
+
+function createHeart() {
+    const heart = document.createElement("span");
+
+    heart.className = "heart";
+    heart.textContent = Math.random() > .5 ? "♡" : "✧";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (12 + Math.random() * 15) + "px";
+
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 9000);
+}
+
+setInterval(createHeart, 1300);
+</script>
+
+</body>
+</html>
